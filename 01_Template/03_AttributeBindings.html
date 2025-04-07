@@ -26,9 +26,17 @@
         <div v-bind:id="dynamicId">{{ value }}</div>
         <div :id="skipId">{{ skipValue }}</div>
     </div>
+    <br>
+    <div id="step02">
+        <h5>비활성화</h5>
+        <input type="text" :disabled="isTrue" :value="isTrue">
+        <!-- <button v-on:click="activation">{{ isTrue }}</button> -->
+        <button @click="activation">{{ isTrue }}</button>
+    </div>
 
     <script>
-        const {createApp, ref} = Vue;
+        const {createApp, ref, reactive} = Vue;
+
         createApp({
             setup() {
                 const dynamicId = ref('vue');
@@ -43,6 +51,41 @@
                 };
             }
         }).mount('#step01');
+
+        createApp({
+            setup() {
+
+                /*
+                    이후에 reactive 파트에서 다루겠지만, vue가 제공하는 reactive 함수를 써서도 객체 데이터를
+                    모델로 관리할 수 있다.(반응성 변수로 관리)
+
+                    ref와 reactive의 차이점
+                    1. ref는 모든 자료형을 관리할 수 있고 reactive는 객체 형태들만 관리할 수 있다.
+                        (객체를 관리할 때는 reactive가 내부적으로 속도가 더 빠르다.)
+                    2. ref는 setup() 안에서 접근할 때 .value를 붙여야하고, reactive는 바로 접근 가능하다.
+                        (template 영역에서는 둘 다 .value를 쓸 필요가 없다.)
+                */
+                const isTrue = ref(false);
+
+                // refObj와 reactiveObj는 컴포넌트(view)에서 사용되는 것이 아닌 단순 함수에서 활용
+                const refObj = ref({test:'ttt'});
+                const reactiveObj = reactive({test:'abc'});
+                const activation = () => {
+                    console.log('기존 isTrue 값: ' + isTrue.value);
+                    console.log('refObj', refObj.value.test);
+                    console.log('reactiveObj', reactiveObj.test);
+                    // ref로 관리되는 데이터는 setup() 안에서는 .value를 사용해야 접근 가능하다.
+                    // reactive는 객체를 담게 설계되어, .value를 쓰지 않아도 데이터에 접근할 수 있다.
+                    isTrue.value = !isTrue.value;
+                    console.log('바뀐 isTrue 값: ' + isTrue.value);
+                };
+
+                return {
+                    isTrue,
+                    activation
+                };
+            }
+        }).mount('#step02');
     </script>
 </body>
 </html>
