@@ -8,10 +8,17 @@
 -->
 
 <template>
-    <div class="redColor">
-        <p>aaaa</p>
-        <MyComponent/>
-    </div>
+    <header>
+        <div class="redColor">
+            <p>aaaa</p>
+            <MyComponent/>
+        </div>
+    </header>
+    <main>
+        <SlotParent/>
+        <NamedParent/>
+        <DynamicParent/>
+    </main>
 </template>
 
 <!-- 
@@ -25,6 +32,9 @@
     // import MyComponent from "./components/01_component/MyComponent.vue";
     // @: src에서 시작하는 경로
     import MyComponent from "@/components/01_component/MyComponent.vue";
+    import SlotParent from "./components/02_slotintro/SlotParent.vue";
+    import NamedParent from "./components/03_namedslot/NamedParent.vue";
+    import DynamicParent from "./components/04_dynamicslot/DynamicParent.vue";
 </script>
 
 <!-- 
