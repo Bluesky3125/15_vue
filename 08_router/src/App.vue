@@ -3,7 +3,7 @@
         <h1>Router 사용하기</h1>
         <hr>
         <div>
-            <h2>Basic Router</h2>
+            <!-- <h2>Basic Router</h2> -->
 
             <!--
                 RouterLink
@@ -11,11 +11,17 @@
                 2. active-class를 쓰면 사용자가 활성화한 버튼에 클래스명으로 css를 별도로 부여할 수 있다.
                 3. replace를 쓰면 뒤로가기를 막는 효과를 낼 수도 있다.
             -->
-            <nav>
-                <!-- 기능이 있는 버튼 -->
+            <!-- <nav>
                 <RouterLink to="/" active-class="active" replace>Home</RouterLink>
                 <RouterLink to="/pathvariable/1" active-class="active" replace>PathVariable</RouterLink>
-                <RouterLink to="/querystring?name=홍길동$age=20" active-class="active" replace>QueryString</RouterLink>
+                <RouterLink to="/querystring?name=홍길동&age=20" active-class="active" replace>QueryString</RouterLink>
+            </nav> -->
+
+            <h2>Nested Router</h2>
+            <nav>
+                <RouterLink to="/" active-class="active" replace>Home</RouterLink>
+                <RouterLink to="/nested/home" active-class="active" replace>중첩 Home</RouterLink>
+                <RouterLink to="/nested/view" active-class="active" replace>중첩 View</RouterLink>
             </nav>
         </div>
     </header>
@@ -54,6 +60,10 @@
     }
 
     header {
+        text-align: center;
+    }
+
+    div {
         text-align: center;
     }
 </style>
